@@ -6,13 +6,19 @@ dist/
 !.env.example
 
 # Render artifacts (regenerate with npm run render)
-content/**/audio/
 content/**/frames/
 content/**/clips/
-content/**/export/
-content/**/voice-record/
+content/**/export/**
+!content/**/export/
 !content/**/export/.gitkeep
+
+content/**/audio/**
+!content/**/audio/
+!content/**/audio/external/
 !content/**/audio/external/.gitkeep
+
+content/**/voice-record/**
+!content/**/voice-record/
 !content/**/voice-record/.gitkeep
 
 # Playwright
