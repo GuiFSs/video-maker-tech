@@ -15,7 +15,7 @@ Depende de: `SCRIPT.md` aprovado.
 
 ## TTS
 
-- Voz: `pt-BR-AntonioNeural`
+- Voz: `pt-BR-ThalitaMultilingualNeural` (rate +10%)
 - Manifesto: `scenes.yaml`
 
 ## Checklist pré-render

@@ -1,4 +1,5 @@
 voice: pt-BR-AntonioNeural
+rate: "+10%"
 scenes:
   - id: S01
     html: scenes/S01.html

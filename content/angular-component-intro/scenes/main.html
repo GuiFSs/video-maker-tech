@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      :root {
+        --bg: #070b12;
+        --ink: #f4f7fb;
+        --muted: #9aa8b8;
+        --cyan: #3ec7ff;
+        --coral: #ff6b6b;
+        --lime: #5dffb0;
+        --yellow: #ffe566;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body {
+        width: 1080px; height: 1920px; overflow: hidden;
+        background: var(--bg); color: var(--ink);
+        font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+      }
+      body {
+        background:
+          radial-gradient(ellipse 80% 40% at 50% 18%, #152033 0%, transparent 60%),
+          var(--bg);
+      }
+      .stage {
+        width: 1080px; height: 1920px;
+        padding: 72px 40px 100px;
+        display: flex; flex-direction: column; align-items: center;
+        position: relative;
+      }
+      .title {
+        min-height: 150px;
+        text-align: center;
+        font-size: 68px;
+        font-weight: 800;
+        line-height: 1.12;
+        letter-spacing: -0.02em;
+        max-width: 18ch;
+      }
+      .kw { color: var(--coral); text-decoration: underline; text-underline-offset: 10px; }
+      .kw2 { color: var(--cyan); text-decoration: underline; text-underline-offset: 10px; }
+      .kw3 { color: var(--lime); text-decoration: underline; text-underline-offset: 10px; }
+
+      .diagram {
+        margin-top: 20px;
+        width: 1000px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 26px;
+        position: relative;
+      }
+
+      .phone {
+        width: 960px;
+        border: 4px solid rgba(255,255,255,0.16);
+        border-radius: 40px;
+        padding: 32px;
+        background: #0e1520;
+        position: relative;
+        transition: opacity 0.3s, transform 0.3s;
+      }
+      .phone.dim { opacity: 0.35; transform: scale(0.98); }
+
+      .header-comp {
+        position: relative;
+        border-radius: 18px;
+        padding: 26px 28px;
+        background: #1c2a3c;
+        font-size: 40px;
+        font-weight: 800;
+        margin-bottom: 22px;
+        border: 3px solid transparent;
+        transition: border-color 0.25s, box-shadow 0.25s;
+      }
+      .header-comp.on {
+        border-color: var(--lime);
+        box-shadow: 0 0 22px rgba(93,255,176,0.3);
+      }
+
+      .btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        min-height: 88px;
+      }
+      .app-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--cyan);
+        color: #041018;
+        font-weight: 800;
+        font-size: 32px;
+        border-radius: 16px;
+        padding: 20px 28px;
+        border: 3px solid transparent;
+        opacity: 0;
+        transform: scale(0.85);
+        transition: opacity 0.3s, transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      }
+      .app-btn.show {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .app-btn.mark {
+        border-color: var(--yellow);
+        box-shadow: 0 0 0 3px rgba(255,229,102,0.25), 0 0 20px rgba(62,199,255,0.35);
+      }
+      .tag {
+        position: absolute;
+        right: -8px; top: -18px;
+        background: var(--yellow);
+        color: #041018;
+        font-size: 20px;
+        font-weight: 800;
+        padding: 6px 12px;
+        border-radius: 999px;
+        white-space: nowrap;
+      }
+
+      .chaos {
+        display: none;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 12px;
+      }
+      .chaos.show { display: grid; }
+      .mess {
+        border: 2px dashed rgba(255,107,107,0.55);
+        border-radius: 16px;
+        padding: 22px;
+        color: var(--coral);
+        font-size: 28px;
+        background: rgba(255,107,107,0.06);
+        animation: jitter 0.9s ease-in-out infinite;
+      }
+      @keyframes jitter {
+        0%,100% { transform: translate(0,0); }
+        50% { transform: translate(2px,-3px); }
+      }
+
+      .code {
+        width: 980px;
+        background: #05080f;
+        border: 2px solid rgba(62,199,255,0.35);
+        border-radius: 20px;
+        padding: 28px 30px;
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: 30px;
+        line-height: 1.42;
+        color: #d7e3ef;
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 0.3s, transform 0.3s;
+        white-space: pre;
+        overflow: hidden;
+        min-height: 260px;
+      }
+      .code.show { opacity: 1; transform: translateY(0); }
+      .k { color: #c792ea; }
+      .t { color: #82aaff; }
+      .s { color: #c3e88d; }
+      .c { color: #6b7c8f; }
+      .m {
+        background: rgba(62,199,255,0.22);
+        border-radius: 4px;
+        box-shadow: inset 0 -3px 0 var(--cyan);
+        padding: 0 3px;
+      }
+      .code-label {
+        align-self: flex-start;
+        margin-left: 20px;
+        font-size: 26px;
+        color: var(--muted);
+        opacity: 0;
+        transition: opacity 0.25s;
+      }
+      .code-label.show { opacity: 1; }
+
+      .pill {
+        position: absolute;
+        left: 50%;
+        bottom: 72px;
+        transform: translateX(-50%);
+        max-width: 960px;
+        padding: 18px 32px;
+        border-radius: 999px;
+        border: 2px solid rgba(255,255,255,0.16);
+        background: rgba(0,0,0,0.78);
+        font-size: 34px;
+        font-weight: 700;
+        text-align: center;
+      }
+      .pill em { font-style: normal; color: var(--yellow); }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <h1 class="title" id="title">Component é só o <span class="kw">HTML</span>?</h1>
+
+      <div class="diagram">
+        <div class="phone" id="phone">
+          <div class="chaos" id="chaos">
+            <div class="mess">html gigante</div>
+            <div class="mess">copia e cola botão</div>
+            <div class="mess">css misturado</div>
+            <div class="mess">difícil reusar</div>
+          </div>
+
+          <div class="header-comp" id="header">Minha lista</div>
+          <div class="btns" id="btns">
+            <div class="app-btn" id="b1">Salvar<span class="tag">app-botao</span></div>
+            <div class="app-btn" id="b2">Cancelar<span class="tag">app-botao</span></div>
+            <div class="app-btn" id="b3">Enviar<span class="tag">app-botao</span></div>
+          </div>
+        </div>
+
+        <div class="code-label" id="codeLabel">código</div>
+        <pre class="code" id="code"></pre>
+      </div>
+
+      <div class="pill" id="pill">espera…</div>
+    </div>
+
+    <script>
+      const title = document.getElementById("title");
+      const pill = document.getElementById("pill");
+      const chaos = document.getElementById("chaos");
+      const phone = document.getElementById("phone");
+      const header = document.getElementById("header");
+      const code = document.getElementById("code");
+      const codeLabel = document.getElementById("codeLabel");
+      const b1 = document.getElementById("b1");
+      const b2 = document.getElementById("b2");
+      const b3 = document.getElementById("b3");
+
+      const CODE_DEFINE = `<span class="c">// define o component uma vez</span>
+<span class="k">@Component</span>({
+  <span class="m">selector</span>: <span class="s">'app-botao'</span>,
+  <span class="m">template</span>: <span class="s">\`&lt;button&gt;{{ texto }}&lt;/button&gt;\`</span>
+})
+<span class="k">export class</span> <span class="t">BotaoComponent</span> {
+  texto = <span class="s">'Salvar'</span>;
+}`;
+
+      const CODE_USE = `<span class="c">// na tela: reutiliza o mesmo component</span>
+<span class="m">&lt;app-botao&gt;</span>Salvar<span class="m">&lt;/app-botao&gt;</span>
+<span class="m">&lt;app-botao&gt;</span>Cancelar<span class="m">&lt;/app-botao&gt;</span>
+<span class="m">&lt;app-botao&gt;</span>Enviar<span class="m">&lt;/app-botao&gt;</span>`;
+
+      const CODE_HEADER_DEFINE = `<span class="c">// define o header uma vez</span>
+<span class="k">@Component</span>({
+  <span class="m">selector</span>: <span class="s">'app-header'</span>,
+  <span class="m">template</span>: <span class="s">\`&lt;h1&gt;Minha lista&lt;/h1&gt;\`</span>
+})
+<span class="k">export class</span> <span class="t">HeaderComponent</span> {}`;
+
+      const CODE_HEADER_USE = `<span class="c">// na tela: chama o header</span>
+<span class="m">&lt;app-header&gt;&lt;/app-header&gt;</span>
+
+<span class="c">// junto com os botões:</span>
+<span class="m">&lt;app-botao&gt;</span>Salvar<span class="m">&lt;/app-botao&gt;</span>`;
+
+      function setTitle(html) { title.innerHTML = html; }
+      function setPill(html) {
+        pill.style.opacity = "0";
+        setTimeout(() => {
+          pill.innerHTML = html;
+          pill.style.opacity = "1";
+        }, 100);
+      }
+      function showCode(html, label) {
+        code.innerHTML = html;
+        code.classList.add("show");
+        codeLabel.textContent = label;
+        codeLabel.classList.add("show");
+      }
+      function hideCode() {
+        code.classList.remove("show");
+        codeLabel.classList.remove("show");
+      }
+      function resetBtns() {
+        [b1, b2, b3].forEach((b) => {
+          b.classList.remove("show", "mark");
+        });
+      }
+
+      // Timeline alinhada às pausas do voice-1.opus (~47s)
+      const phases = [
+        {
+          at: 0,
+          run() {
+            setTitle('Component é só o <span class="kw">HTML</span>?');
+            setPill("gancho 👀");
+            chaos.classList.remove("show");
+            hideCode();
+            resetBtns();
+            header.classList.remove("on");
+            phone.classList.remove("dim");
+          },
+        },
+        {
+          at: 3.5,
+          run() {
+            setTitle('Um arquivo <span class="kw">só</span>… bagunça');
+            setPill("copia e cola o mesmo botão?");
+            chaos.classList.add("show");
+          },
+        },
+        {
+          at: 9.3,
+          run() {
+            setTitle('Cria um <span class="kw2">BotaoComponent</span>');
+            setPill("define <em>uma vez</em>");
+            chaos.classList.remove("show");
+            phone.classList.add("dim");
+            showCode(CODE_DEFINE, "1) cria o component");
+            resetBtns();
+          },
+        },
+        // Ficava em 17.2 e adiantava a tela enquanto a voz ainda explicava a definição
+        {
+          at: 21.0,
+          run() {
+            setTitle('Na tela: <span class="kw3">chama</span> o component');
+            setPill("<em>&lt;app-botao&gt;</em> — usa de novo");
+            phone.classList.remove("dim");
+            showCode(CODE_USE, "2) reutiliza no template");
+            b1.classList.add("show", "mark");
+            b2.classList.remove("show", "mark");
+            b3.classList.remove("show", "mark");
+          },
+        },
+        {
+          at: 24.0,
+          run() {
+            b2.classList.add("show", "mark");
+            setPill("mesmo component · outro texto");
+          },
+        },
+        {
+          at: 26.5,
+          run() {
+            b3.classList.add("show", "mark");
+            setPill("<em>3 botões</em> · 1 component");
+          },
+        },
+        // Header: voz começa ~33s — não pular cedo para o recap/uso geral
+        {
+          at: 32.8,
+          run() {
+            setTitle('Header também é <span class="kw2">component</span>');
+            setPill("define o <em>HeaderComponent</em>");
+            header.classList.add("on");
+            [b1, b2, b3].forEach((b) => b.classList.remove("mark"));
+            showCode(CODE_HEADER_DEFINE, "3) cria o header");
+          },
+        },
+        {
+          at: 38.5,
+          run() {
+            setTitle('Na tela: <span class="kw3">&lt;app-header&gt;</span>');
+            setPill("mesmo padrão do botão");
+            showCode(CODE_HEADER_USE, "4) chama na tela");
+            header.classList.add("on");
+          },
+        },
+        {
+          at: 41.5,
+          run() {
+            setTitle('Component ≠ só <span class="kw">HTML</span>');
+            setPill("define uma vez · <em>reusa</em> na tela");
+            showCode(CODE_USE, "reuso = várias tags iguais");
+            header.classList.add("on");
+            [b1, b2, b3].forEach((b) => b.classList.add("show", "mark"));
+          },
+        },
+        {
+          at: 44.0,
+          run() {
+            setTitle('Um bloco <span class="kw3">reutilizável</span>');
+            setPill("comenta: o que ainda te confunde?");
+            hideCode();
+            phone.classList.remove("dim");
+          },
+        },
+      ];
+
+      const start = performance.now();
+      let idx = 0;
+      phases[0].run();
+      function tick() {
+        const t = (performance.now() - start) / 1000;
+        while (idx + 1 < phases.length && t >= phases[idx + 1].at) {
+          idx += 1;
+          phases[idx].run();
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    </script>
+  </body>
+</html>

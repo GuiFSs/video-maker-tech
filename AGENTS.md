@@ -8,6 +8,8 @@ Leia antes de criar ou alterar um vídeo:
 
 - `docs/process/video-workflow.md` — fluxo, gates, DoR/DoD e frase de aprovação
 - `docs/pedagogy/short-form.md` — princípios didáticos
+- `docs/style/techpulse-like.md` — 1 canvas, gancho, motion (anti-slide)
+- `docs/style/voice-external.md` — voz humana / CapCut (preferido ao edge-tts)
 - Templates em `docs/templates/`
 - Skills em `skills/`
 - Briefings em `agents/`
@@ -36,12 +38,12 @@ O orquestrador lê e corrige só o `STATUS.md`; não pula fases.
 
 ## Stack free (não negociável no v1)
 
-- Narração: `edge-tts` (PT-BR)
+- Narração: **voz humana ou CapCut** em `audio/external/` (preferido); `edge-tts` só fallback
 - Montagem: FFmpeg
-- Visuais: cenas HTML 1080×1920 → PNG (Playwright)
+- Visuais: HTML 1080×1920 **animado** gravado com Playwright (preferir 1 canvas + timeline)
 - Comando: `npm run render -- <slug>`
 
-Sem APIs pagas de vídeo, voz ou edição.
+Sem APIs pagas de vídeo, voz ou edição. Não versionar áudios nem exports (ver `.gitignore`).
 
 ## Regras
 

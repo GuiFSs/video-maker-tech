@@ -1,0 +1,5 @@
+Component é só o HTML? Não. Se tudo fica num arquivo só, você acaba copiando o mesmo botão várias vezes.
+No Angular, você cria um Botão Component uma vez: selector app-botão e o template do botão.
+Na tela, é só chamar: app-botão, app-botão, app-botão. Três botões, o mesmo component.
+O header também: app-header. Define uma vez, reutiliza onde precisar.
+Component não é só o HTML. É a peça que você chama de novo. Comenta: o que ainda te confunde?

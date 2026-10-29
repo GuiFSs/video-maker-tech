@@ -2,7 +2,7 @@
 
 Depende de: `STORYBOARD.md` aprovado.
 
-Voz TTS default: `pt-BR-AntonioNeural` (ou `pt-BR-FranciscaNeural`).
+Voz TTS default: `pt-BR-AntonioNeural` (rate +10%). Preferir **1 canvas com estados** em vez de muitas cenas.
 
 ## Cenas
 

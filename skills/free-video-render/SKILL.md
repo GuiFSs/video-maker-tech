@@ -12,4 +12,6 @@ description: Gera scenes HTML 9:16, scenes.yaml e renderiza MP4 com edge-tts + F
 5. Verifique `export/vertical-9x16.mp4` e `export/captions.srt`.
 6. Se falhar (ffmpeg, edge-tts, playwright), diagnostique e corrija — não marque sucesso.
 
+**Dinâmica (TechPulse-like):** preferir **1 HTML com timeline JS** (estados no mesmo canvas) em vez de várias cenas. O render grava a página animada (Playwright). Micro-motion contínuo; caption pill; keyword colorida. Cortes/xfade só entre metáforas diferentes.
+
 Stack permitida: edge-tts, FFmpeg, Playwright, Node scripts deste repo.

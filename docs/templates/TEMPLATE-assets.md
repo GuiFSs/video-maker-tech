@@ -12,6 +12,8 @@ Depende de: `SCRIPT.md` aprovado.
 ## TTS
 
 - Voz: `pt-BR-AntonioNeural`
+- Rate: `+10%`
+- Preferir 1 HTML principal com timeline (estilo TechPulse)
 - Arquivos gerados em `audio/` pelo render (não versionar)
 
 ## Checklist pré-render

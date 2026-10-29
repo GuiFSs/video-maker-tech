@@ -10,7 +10,10 @@ content/**/audio/
 content/**/frames/
 content/**/clips/
 content/**/export/
+content/**/voice-record/
 !content/**/export/.gitkeep
+!content/**/audio/external/.gitkeep
+!content/**/voice-record/.gitkeep
 
 # Playwright
 test-results/

@@ -10,5 +10,6 @@ description: Escreve SCRIPT pt-BR falável e legendas curtas sincronizadas ao st
 3. Evite “olá pessoal / hoje vamos falar”.
 4. Legenda: versão ainda mais curta do que aparece/é falado.
 5. Feche com recap de uma frase + CTA leve.
-6. Indique voz TTS sugerida (`pt-BR-AntonioNeural` ou `pt-BR-FranciscaNeural`).
+6. Voz default: `pt-BR-AntonioNeural` (+10%). Preferir um canvas que evolui; evitar trocar de scene a cada frase.
+
 7. Peça aprovação antes dos assets.

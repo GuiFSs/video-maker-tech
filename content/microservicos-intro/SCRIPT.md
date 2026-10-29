@@ -2,7 +2,7 @@
 
 Depende de: `STORYBOARD.md` aprovado.
 
-Voz TTS default: `pt-BR-AntonioNeural`.
+Voz TTS default: `pt-BR-ThalitaMultilingualNeural` (rate +10%).
 
 ## Cenas
 

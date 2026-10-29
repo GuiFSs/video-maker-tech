@@ -17,7 +17,13 @@ Aprovado pelo usuário em YYYY-MM-DD
 
 No macOS, o `pip --user` costuma instalar o CLI em `~/Library/Python/3.x/bin` — inclua no PATH ou use o resolvedor do render (`python3 -m edge_tts`).
 
-Legendas: o master leva texto nas cenas HTML + `captions.srt`. Burn-in via filtro `subtitles` só roda se o seu ffmpeg tiver **libass**; caso contrário o pipeline segue sem falhar.
+O render **grava a página HTML animada** (Playwright video) + áudio, com fades/`xfade` entre cenas — não é slideshow de PNG.
+
+**Estilo:** preferir 1 HTML com timeline (TechPulse-like) — [`docs/style/techpulse-like.md`](docs/style/techpulse-like.md).
+
+**Voz:** gravar `.opus`/MP3 ou CapCut — [`docs/style/voice-external.md`](docs/style/voice-external.md). Pasta `audio/external/` (gitignored). Edge-tts só fallback.
+
+**Exemplo:** `content/angular-component-intro/` (component Angular + reuso). Render: `npm run render -- angular-component-intro`.
 
 ## Setup
 
