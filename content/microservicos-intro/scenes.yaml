@@ -1,0 +1,26 @@
+voice: pt-BR-AntonioNeural
+scenes:
+  - id: S01
+    html: scenes/S01.html
+    narration: Se o seu app fosse um mercado, você colocaria todos os produtos num estoque só?
+    caption: Um estoque só para tudo?
+  - id: S02
+    html: scenes/S02.html
+    narration: Melhor cada loja cuidar do próprio estoque e combinar como pedir mercadoria à outra.
+    caption: Cada loja, seu estoque
+  - id: S03
+    html: scenes/S03.html
+    narration: Isso é a ideia de microserviço. Uma responsabilidade, dados próprios e um contrato para falar com o resto.
+    caption: Responsabilidade + dados + contrato
+  - id: S04
+    html: scenes/S04.html
+    narration: No Lista de Compras, listas, preços e autenticação vivem em serviços separados, cada um dono do seu dado.
+    caption: listas · preços · auth
+  - id: S05
+    html: scenes/S05.html
+    narration: Cuidado. Só separar pastas no monólito, sem fronteira de dados, ainda não é microserviço.
+    caption: Pastas ≠ fronteira
+  - id: S06
+    html: scenes/S06.html
+    narration: Lembra. Um serviço, um estoque, um contrato. Comenta. O que ainda te confunde?
+    caption: Um serviço · um estoque · um contrato

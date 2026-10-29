@@ -1,0 +1,28 @@
+node_modules/
+dist/
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Render artifacts (regenerate with npm run render)
+content/**/audio/
+content/**/frames/
+content/**/clips/
+content/**/export/
+!content/**/export/.gitkeep
+
+# Playwright
+test-results/
+playwright-report/
+.cache/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+*.log
+.tmp/
+tmp/

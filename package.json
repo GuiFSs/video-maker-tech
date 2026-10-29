@@ -1,0 +1,19 @@
+{
+  "name": "video-maker-tech",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Estúdio free de vídeos didáticos short-form com gates de aprovação",
+  "type": "module",
+  "scripts": {
+    "setup": "npx playwright install chromium",
+    "render": "node tools/render/render.mjs",
+    "render:example": "node tools/render/render.mjs microservicos-intro"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0",
+    "yaml": "^2.6.0"
+  }
+}
